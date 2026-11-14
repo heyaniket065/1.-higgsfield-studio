@@ -1,3 +1,0 @@
-# Patch context deliberately includes trailing spaces on empty context lines.
-*.patch -whitespace
-*.sh whitespace=-blank-at-eol

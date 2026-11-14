@@ -1,1 +1,0 @@
-export const CUSTOMER_COUNT_LOWER_BOUND = 800;
