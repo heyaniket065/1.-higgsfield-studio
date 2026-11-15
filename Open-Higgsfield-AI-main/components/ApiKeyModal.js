@@ -14,54 +14,46 @@ export default function ApiKeyModal({ onSave }) {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-[#0a0a0a] border border-white/10 rounded-3xl p-8">
-        <div className="flex flex-col items-center text-center mb-8">
-          <div className="w-16 h-16 bg-[#d9ff00]/10 rounded-2xl flex items-center justify-center border border-[#d9ff00]/20 mb-6">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#d9ff00" strokeWidth="1.5">
-              <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L12 17.25l-4.5-4.5L15.5 7.5z"/>
-            </svg>
-          </div>
-          <h1 className="text-2xl font-black text-white uppercase tracking-wider mb-2">
-            Open Higgsfield AI
-          </h1>
-          <p className="text-white/40 text-sm">
-            Enter your <a href="https://muapi.ai" target="_blank" rel="noreferrer" className="text-[#d9ff00] hover:underline">Muapi.ai</a> API key to start generating
-          </p>
+    <main className="relative min-h-screen overflow-hidden bg-[#090a08] px-4 py-12 text-white flex items-center justify-center">
+      <div aria-hidden="true" className="pointer-events-none absolute -left-40 -top-40 size-[28rem] rounded-full bg-[#d9ff00]/[.045] blur-[100px]" />
+      <div aria-hidden="true" className="pointer-events-none absolute -bottom-48 -right-24 size-[32rem] rounded-full bg-[#d9ff00]/[.025] blur-[110px]" />
+      <section className="relative w-full max-w-[460px] rounded-[28px] border border-white/[.09] bg-[#10110e]/95 p-7 shadow-[0_30px_100px_rgba(0,0,0,.55)] sm:p-10">
+        <div className="mb-9 flex items-center gap-3">
+          <span className="grid size-9 place-items-center rounded-xl bg-[#d9ff00] text-sm font-black text-black">H</span>
+          <span className="text-sm font-semibold tracking-tight">Higgsfield <span className="font-normal text-white/40">Studio</span></span>
+        </div>
+        <div className="mb-8">
+          <p className="mb-3 text-[10px] font-semibold uppercase tracking-[.22em] text-[#d9ff00]/75">Your creative workspace</p>
+          <h1 className="text-[32px] font-semibold leading-tight tracking-[-.04em] sm:text-[38px]">Make something<br />worth looking at.</h1>
+          <p className="mt-3 max-w-sm text-sm leading-6 text-white/45">Connect your generation engine to explore image, video, lip sync, and cinematic tools.</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-2">
-              Muapi API Key
-            </label>
+            <label htmlFor="muapi-key" className="mb-2 block text-[11px] font-medium uppercase tracking-[.14em] text-white/45">Muapi API key</label>
             <input
+              id="muapi-key"
               type="password"
+              autoComplete="off"
               value={key}
               onChange={(e) => { setKey(e.target.value); setError(''); }}
-              placeholder="Enter your API key..."
-              className="w-full bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-[#d9ff00]/40 transition-colors"
+              placeholder="Paste your API key"
+              aria-invalid={Boolean(error)}
+              aria-describedby={error ? 'api-key-error' : 'api-key-help'}
+              className="w-full rounded-xl border border-white/[.1] bg-black/30 px-4 py-3.5 text-sm text-white placeholder:text-white/25 outline-none transition-colors focus:border-[#d9ff00]/50 focus:ring-2 focus:ring-[#d9ff00]/10"
               suppressHydrationWarning
             />
-            {error && <p className="mt-1 text-red-400 text-xs">{error}</p>}
+            {error && <p id="api-key-error" role="alert" className="mt-2 text-xs text-red-300">{error}</p>}
           </div>
-
-          <button
-            type="submit"
-            className="w-full bg-[#d9ff00] text-black font-black py-3 rounded-xl hover:opacity-90 transition-opacity"
-            suppressHydrationWarning
-          >
-            Launch Studio
+          <button type="submit" className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#d9ff00] py-3.5 text-sm font-semibold text-black transition hover:bg-[#e4ff48] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d9ff00] focus-visible:ring-offset-2 focus-visible:ring-offset-[#10110e]" suppressHydrationWarning>
+            Enter the studio <span aria-hidden="true">→</span>
           </button>
-
-          <p className="text-center text-xs text-white/30">
-            Don&apos;t have a key?{' '}
-            <a href="https://muapi.ai" target="_blank" rel="noreferrer" className="text-[#d9ff00] hover:underline">
-              Get one free at Muapi.ai →
-            </a>
-          </p>
+          <p id="api-key-help" className="text-center text-xs text-white/35">Your key stays in this browser and is never shown in the interface.</p>
         </form>
-      </div>
-    </div>
+        <div className="mt-7 border-t border-white/[.07] pt-5 text-center text-xs text-white/35">
+          New to Muapi? <a href="https://muapi.ai" target="_blank" rel="noreferrer" className="text-white/70 underline decoration-white/20 underline-offset-4 hover:text-[#d9ff00]">Get an API key</a>
+        </div>
+      </section>
+    </main>
   );
 }
